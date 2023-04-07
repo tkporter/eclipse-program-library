@@ -3,7 +3,9 @@ use solana_program::{
     pubkey::Pubkey,
 };
 
-declare_id!("noopb9bkMVfRPU8AsbpTUg8AQkHtKwMYZiFUjNRtMmV");
+// FIXME
+// declare_id!("noopb9bkMVfRPU8AsbpTUg8AQkHtKwMYZiFUjNRtMmV");
+declare_id!("GpiNbGLpyroc8dFKPhK55eQhhvWn3XUaXJFp5fk5aXUs");
 
 #[cfg(not(feature = "no-entrypoint"))]
 use solana_program::entrypoint;
