@@ -12,7 +12,7 @@ edition = "2021"
 debug = []
 
 [dependencies]
-solana-program = "1.9.18"
+solana-program = "=1.14.13"
 arrayref = "0.3.6"
 arraystring = "0.3.0"
 serde = "1.0.136"
@@ -34,8 +34,8 @@ lazy_static = "1.4.0"
 ahash = "0.7.6"
 
 [build-dependencies]
-solana-program = "1.9.18"
+solana-program = "=1.14.13"
 
 [dev-dependencies]
-solana-program-test = "1.9.18"
+solana-program-test = "=1.14.13"
 
