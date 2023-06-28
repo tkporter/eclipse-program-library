@@ -3,7 +3,7 @@ use {
     bytemuck::{Pod, Zeroable},
     solana_program::{program_error::ProgramError, program_option::COption, pubkey::Pubkey},
     solana_zk_token_sdk::zk_token_elgamal::pod,
-    std::convert::TryFrom,
+    std::fmt,
 };
 
 /// A Pubkey that encodes `None` as all `0`, meant to be usable as a Pod type,
@@ -11,6 +11,13 @@ use {
 #[derive(Clone, Copy, Debug, Default, PartialEq, Pod, Zeroable)]
 #[repr(transparent)]
 pub struct OptionalNonZeroPubkey(Pubkey);
+
+impl fmt::Display for OptionalNonZeroPubkey {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{self:?}")
+    }
+}
+
 impl TryFrom<Option<Pubkey>> for OptionalNonZeroPubkey {
     type Error = ProgramError;
     fn try_from(p: Option<Pubkey>) -> Result<Self, Self::Error> {
