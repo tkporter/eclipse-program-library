@@ -11,13 +11,15 @@ use {
 #[derive(Clone, Copy, Debug, Default, PartialEq, Pod, Zeroable)]
 #[repr(transparent)]
 pub struct OptionalNonZeroPubkey(Pubkey);
-
 impl fmt::Display for OptionalNonZeroPubkey {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{self:?}")
+        if self.0.as_ref().iter().all(|&b| b == 0) {
+            write!(f, "None")
+        } else {
+            write!(f, "{}", self.0)
+        }
     }
 }
-
 impl TryFrom<Option<Pubkey>> for OptionalNonZeroPubkey {
     type Error = ProgramError;
     fn try_from(p: Option<Pubkey>) -> Result<Self, Self::Error> {
@@ -73,6 +75,15 @@ pub type EncryptionPubkey = pod::ElGamalPubkey;
 #[derive(Clone, Copy, Debug, Default, PartialEq, Pod, Zeroable)]
 #[repr(transparent)]
 pub struct OptionalNonZeroEncryptionPubkey(EncryptionPubkey);
+impl fmt::Display for OptionalNonZeroEncryptionPubkey {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if self.0 .0.iter().all(|&b| b == 0) {
+            write!(f, "None")
+        } else {
+            write!(f, "{}", self.0)
+        }
+    }
+}
 impl OptionalNonZeroEncryptionPubkey {
     /// Checks equality between an OptionalNonZeroEncryptionPubkey and an EncryptionPubkey when
     /// interpreted as bytes.
